@@ -1,0 +1,12 @@
+name: rikulo_gapi
+version: 0.5.0
+description: >
+  Rikulo GAPI is a bridge implementation to access those frequently used on-line
+   JavaScript services provided by Google and others.
+authors:
+- Henri Chen <henrichen@rikulo.org>
+homepage: http://rikulo.org
+dependencies:
+  rikulo_commons:
+    git: git://github.com/rikulo/rikulo-commons.git
+  js :
