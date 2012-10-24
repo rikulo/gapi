@@ -48,17 +48,16 @@ class GFeed {
     js.scoped(() {
       if (jsFeed == null) {
         var feeds = js.context.google.feeds;
-        jsFeed = new js.Proxy(feeds.Feed, [_url]);
-        jsFeed.setResultFormat(feeds.Feed.XML_FORMAT);
+        jsFeed = new js.Proxy(feeds.Feed, _url);
+        jsFeed.setResultFormat("xml"); //feeds.Feed.XML_FORMAT;
         js.retain(jsFeed);
       }
-      var callback = new js.Callback.once((xmldoc)
-        => cmpl.complete(JSUtil.xmlNodeToDartMap(xmldoc.documentElement, new Map())));
-      try {
-        jsFeed.load(callback);
-      } catch(ex) {
-        return new Future.immediate(null);
-      }
+      var callback = new js.Callback.once((result) {
+        if (result['xmlDocument'] != null) {
+          cmpl.complete(JSUtil.xmlNodeToDartMap(result['xmlDocument'].documentElement, new Map()));
+        }
+      });
+      jsFeed.load(callback);
     });
     return cmpl.future;
   }

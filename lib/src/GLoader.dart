@@ -56,9 +56,13 @@ class GLoader {
 
   Future<bool> _initGLoader() {
     if (_loaderStatus == null) {
-      _loaderStatus = false; //loading
+      _loaderStatus = false; //change state to loading
       return _loadGLoader();
     }
+    else if (!_loaderStatus) //is loading
+      return _waitGLoaderReady();
+    else //already loaded
+      return new Future.immediate(true);
   }
 
   //Load the GLoader
@@ -66,13 +70,18 @@ class GLoader {
     //start loading
     JSUtil.injectJavaScriptSrc(_BASE_URI);
 
+    //wait until loaded
+    return _waitGLoaderReady();
+  }
+
+  //Wait the GLoader loaded and ready
+  Future<bool> _waitGLoaderReady() {
     //check if loaded every 10 ms, wait total 180 seconds
     Future<bool> loader = JSUtil.doWhenReady(_readyGLoader, 10, 180000);
-
-    loader.chain((bool ok) {
-      if (ok) //loaded
+    return loader.chain((bool ok) {
+      if (ok) {//loaded
         _loaderStatus = true;
-      else { //fail to load. Timeout!
+    } else if (_loaderStatus != null) { //fail to load. Timeout!
         _loaderStatus = null;
         JSUtil.removeJavaScriptSrc(_BASE_URI);
       }
@@ -87,20 +96,19 @@ class GLoader {
   }
 
   Future<bool> _load(String name, String version, [Map options]) {
+    options = options != null ? new Map.from(options) : new Map();
     var fn = options.remove('callback');
     Completer cmpl = new Completer();
-    options['callback'] = () {
-      if (fn != null) fn();
-      cmpl.complete(true);
-    };
-    try {
-      js.scoped(() {
-        var opts = js.map(options);
-        js.context.google.load(name, version, opts);
+    js.scoped(() {
+      options['callback'] = new js.Callback.once(() {
+        if (fn != null) fn();
+        cmpl.complete(true);
       });
-    } catch(ex) {
-      return new Future.immediate(false);
-    }
+    });
+    js.scoped(() {
+      var opts = js.map(options);
+      js.context.google.load(name, version, opts);
+    });
     return cmpl.future;
   }
 }
