@@ -2,12 +2,12 @@
 //History: Wed, Jun 20, 2012  10:30:28 AM
 // Author: hernichen
 
+/** Singleton Google API module loader */
+GLoader gLoader = new GLoader._internal();
+
 /**
  * Bridge Dart to Google JavaScript APIs loader; see https://developers.google.com/loader/ for details.
  */
-
-GLoader gLoader = new GLoader();
-
 class GLoader {
   static const String _BASE_URI = "https://www.google.com/jsapi";
 
@@ -21,6 +21,10 @@ class GLoader {
   static const String PICKER = "picker";
 
   static bool _loaderStatus; //null(not loaded), false(loading), true(loaded)
+
+  factory GLoader() => gLoader;
+
+  GLoader._internal(){}
 
   /** Load Google JavaScript API module; see <https://developers.google.com/loader/#GoogleLoad> for details.
    * + [name] the module name

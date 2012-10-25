@@ -2,14 +2,19 @@
 //History: Thu, Jul 5, 2012  11:11:13 AM
 // Author: hernichen
 
-/** Singleton GAnalytics */
-GAnalytics gAnalytics = new GAnalytics();
+/** Singleton Google Analytics */
+GAnalytics gAnalytics = new GAnalytics._internal();
 
 /**
  * Bridge Dart to Google Analytics JavaScript APIs;
  * see <https://developers.google.com/analytics/devguides/> for details.
  */
 class GAnalytics {
+
+  factory GAnalytics() => gAnalytics;
+
+  GAnalytics._internal(){}
+
   /**
    * Push a List as a command with arguments to be executed by the Google
    * Analytics engine. It returns the number of commands that failed to execute.

@@ -53,9 +53,10 @@ class GFeed {
         js.retain(jsFeed);
       }
       var callback = new js.Callback.once((result) {
-        if (result['xmlDocument'] != null) {
+        if (result['xmlDocument'] != null)
           cmpl.complete(JSUtil.xmlNodeToDartMap(result['xmlDocument'].documentElement, new Map()));
-        }
+        else if (result['error'] != null)
+          cmpl.complete({'error' : {'code' : result.error.code, 'message' : result.error.message}});
       });
       jsFeed.load(callback);
     });
