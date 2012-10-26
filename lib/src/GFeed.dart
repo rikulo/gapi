@@ -14,6 +14,7 @@ class GFeed {
 
   /**
    * Prepare a Google Feed.
+   *
    * + [url] - the url of this Feed.
    * + [version] - the Google Feed API version to be loaded; default "1".
    * + [options] - special option when loading Google Feed API (used by Google Loader).
@@ -24,7 +25,9 @@ class GFeed {
       this._options = options;
 
 
-  /** Load feed information in a Map via Future.then() method; null if failed.*/
+  /** Load feed information in a Map via Future.then((Map result) {...}) method;
+   * null result if failed.
+   */
   Future<Map> loadFeedInfo()
   => _loadModule()
         .chain((bool ok) => ok ? _load() : new Future.immediate(null));

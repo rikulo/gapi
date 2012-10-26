@@ -20,78 +20,94 @@ class PageTracker {
   }
 
   /** Returns the name of the tracker.
+   *
    * e.g.
-   *    GAnalytics.pushFunction(() {
-   *      PageTracker tracker = GAnalytics.getTrackerByName(); //default tracker
-   *      String name = tracker.getName();
-   *    });
+   *
+   *     gAnalytics.pushFunction(() {
+   *       PageTracker tracker = gAnalytics.getTrackerByName(); //default tracker
+   *       String name = tracker.getName();
+   *     });
    */
   String getName() => js.scoped(() => _tracker._getName());
 
   /** Returns the analytics account ID for this tracker.
+   *
    * e.g.
-   *    GAnalytics.pushFunction(() {
-   *      PageTracker tracker = GAnalytics.getTrackerByName(); //default tracker
-   *      String account = tracker.getAccount();
-   *    });
+   *
+   *     gAnalytics.pushFunction(() {
+   *       PageTracker tracker = gAnalytics.getTrackerByName(); //default tracker
+   *       String account = tracker.getAccount();
+   *     });
    */
   String getAccount() => js.scoped(() => _tracker._getAccount());
 
   /** Returns the analytics version
+   *
    * e.g.
-   *    GAnalytics.pushFunction(() {
-   *      PageTracker tracker = GAnalytics.getTrackerByName(); //default tracker
-   *      String version = tracker.getVersion();
-   *    });
+   *
+   *     gAnalytics.pushFunction(() {
+   *       PageTracker tracker = gAnalytics.getTrackerByName(); //default tracker
+   *       String version = tracker.getVersion();
+   *     });
    */
   String getVersion() => js.scoped(() => _tracker._getVersion());
 
   /** Returns visitor level custom variable value assigned for the specified
    * [index].
+   *
    * e.g.
-   *    GAnalytics.pushFunction(() {
-   *      PageTracker tracker = GAnalytics.getTrackerByName(); //default tracker
-   *      String name = tracker.getVisitorCustomVar(1);
-   *    });
+   *
+   *     gAnalytics.pushFunction(() {
+   *       PageTracker tracker = gAnalytics.getTrackerByName(); //default tracker
+   *       String name = tracker.getVisitorCustomVar(1);
+   *     });
    */
   String getVisitorCustomVar(int index)
   => js.scoped(() => _tracker._getVisitorCustomVar(index));
 
   /** Returns a string of all GATC cookie data from the initiating link by
    * appending it to the URL parameter.
+   *
    * e.g.
-   *    GAnalytics.pushFunction(() {
-   *      PageTracker tracker = GAnalytics.getTrackerByName(); //default tracker
-   *      String linkerUrl = tracker.getLinkerUrl("http://www.myiframe.com/");
-   *    });
+   *
+   *     gAnalytics.pushFunction(() {
+   *       PageTracker tracker = gAnalytics.getTrackerByName(); //default tracker
+   *       String linkerUrl = tracker.getLinkerUrl("http://www.myiframe.com/");
+   *     });
    */
   String getLinkerUrl(String targetUrl, bool useHash)
   => js.scoped(() => _tracker._getLinkerUrl(targetUrl, useHash));
 
   /** Returns whether the browser tracking module is enabled.
+   *
    * e.g.
-   *    GAnalytics.pushFunction(() {
-   *      PageTracker tracker = GAnalytics.getTrackerByName(); //default tracker
-   *      bool clientInfo = tracker.getClientInfo();
-   *    });
+   *
+   *     gAnalytics.pushFunction(() {
+   *       PageTracker tracker = gAnalytics.getTrackerByName(); //default tracker
+   *       bool clientInfo = tracker.getClientInfo();
+   *     });
    */
   bool getClientInfo() => js.scoped(() => _tracker._getClientInfo());
 
   /** Returns whether detect Flash.
+   *
    * e.g.
-   *    GAnalytics.pushFunction(() {
-   *      PageTracker tracker = GAnalytics.getTrackerByName(); //default tracker
-   *      bool detectFlash = tracker.getDetectFlash();
-   *    });
+   *
+   *     gAnalytics.pushFunction(() {
+   *       PageTracker tracker = gAnalytics.getTrackerByName(); //default tracker
+   *       bool detectFlash = tracker.getDetectFlash();
+   *     });
    */
   bool getDetectFlash() => js.scoped(() => _tracker._getDetectFlash());
 
   /** Returns whether detect title.
+   *
    * e.g.
-   *    GAnalytics.pushFunction(() {
-   *      PageTracker tracker = GAnalytics.getTrackerByName(); //default tracker
-   *      bool dectectTitle = tracker.getDetectTitle();
-   *    });
+   *
+   *     gAnalytics.pushFunction(() {
+   *       PageTracker tracker = gAnalytics.getTrackerByName(); //default tracker
+   *       bool dectectTitle = tracker.getDetectTitle();
+   *     });
    */
   bool getDetectTitle() => js.scoped(() => _tracker._getDetectTitle());
 }

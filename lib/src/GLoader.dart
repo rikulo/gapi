@@ -26,10 +26,17 @@ class GLoader {
 
   GLoader._internal(){}
 
-  /** Load Google JavaScript API module; see <https://developers.google.com/loader/#GoogleLoad> for details.
+  /** Load Google JavaScript API module;
+   *  see <https://developers.google.com/loader/#GoogleLoad> for details.
+   *
+   *  boolean `true` is passed back if successfully loaded the module via the
+   *  Future.then((bool result) {...}) method; or pass `false` if failed to
+   *  load the module.
+   *
    * + [name] the module name
    * + [version] the module version
-   * + [options] the options used in loading the module; can specify a *callback* function when module loaded.
+   * + [options] the options used in loading the module; can specify a
+   *   'callback' function when module loaded.
    */
   Future<bool> load(String name, String version, [Map options]) {
     Future<bool> loader = _initGLoader();
@@ -37,10 +44,12 @@ class GLoader {
         _load(name, version, options) : new Future.immediate(false));
   }
 
-  /** Load latitude/longitude of the calling client via Future.then(Map) method.
-   * Note that this service sometimes return null value. In the Map with key:
-   * + 'lat': return the latitude.
-   * + 'lng': return the longitude.
+  /** Load latitude/longitude of the calling client via
+   * Future.then((Map result) {...}) method.
+   * Note that this service sometimes pass null result. In the Map with key:
+   *
+   * + 'lat' - return the latitude.
+   * + 'lng' - return the longitude.
    */
   Future<Map> loadIPLatLng() {
     Future<bool> loaded = _initGLoader();

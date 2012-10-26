@@ -21,13 +21,13 @@ class GAnalytics {
    *
    * e.g. create the default tracker and start page tracking.
    *
-   *     GAnalytics.push(['_setAccount', 'UA-65432-1']);
-   *     GAnalytics.push(['_trackPageview']);
+   *     gAnalytics.push(['_setAccount', 'UA-65432-1']);
+   *     gAnalytics.push(['_trackPageview']);
    *
    * e.g. track change event of Switch.
    *
    *     new Switch().on.change.add((event) {
-   *        GAnalytics.push(['_trackEvent', 'switch1', 'change']);
+   *        gAnalytics.push(['_trackEvent', 'switch1', 'change']);
    *        ... //handle the event
    *     });
    *
@@ -35,7 +35,7 @@ class GAnalytics {
    * <https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApi_gaq#_gaq.push>
    * for details.
    *
-   * + [command] the command with arguments in the List to be executed by
+   * + [command] - the command with arguments in the List to be executed by
    *   Analytics engine asynchronously.
    */
   int push(List command) {
@@ -50,17 +50,17 @@ class GAnalytics {
    *
    * e.g. builds a linker URL and sets the href property for the link.
    *
-   *    GAnalytics.pushFunction(() {
-   *      PageTracker tracker = GAnalytics.getTrackerByName(); //default tracker
-   *      AnchorElement link = query('#mylink');
-   *      link.href = tracker.getLinkerUrl("http://www.myiframe.com/");
-   *    });
+   *     gAnalytics.pushFunction(() {
+   *       PageTracker tracker = gAnalytics.getTrackerByName(); //default tracker
+   *       AnchorElement link = query('#mylink');
+   *       link.href = tracker.getLinkerUrl("http://www.myiframe.com/");
+   *     });
    *
    * see <https://developers.google.com/analytics/devguides/> and
    * <https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApi_gaq#_gaq.push>
    * for details.
    *
-   * + [fn] the function to be executed by Analytics engine asynchronously.
+   * + [fn] - the function to be executed by Analytics engine asynchronously.
    */
   int pushFunction(Function fn) {
     _initJSFunctions();
@@ -74,8 +74,8 @@ class GAnalytics {
    * Set disable-tracking flag. After set to true, no tracking information of the spcified account
    * on this page would be sent to analytics server.
    *
-   * + [account] tracking account
-   * + [flag] optional boolean flag to disable the tracking of the specified account in this page; default to true.
+   * + [account] - tracking account
+   * + [flag] - optional boolean flag to disable the tracking of the specified account in this page; default to true.
    */
   void setDisableTracking(String account, [bool flag = true]) {
     _initJSFunctions();
@@ -84,8 +84,9 @@ class GAnalytics {
 
   /**
    * Create a tracker with the specified name.
-   * + [account] tracking account
-   * + [name] tracker name; if not given, default to empty string.
+   *
+   * + [account] - tracking account
+   * + [name] - tracker name; if not given, default to empty string.
    */
   PageTracker createTracker(String account, [String name]) {
     _initJSFunctions();
@@ -96,7 +97,8 @@ class GAnalytics {
   /**
    * Returns the tracker with the specified name. If no tracker with the specified name, a new
    * tracker will be created automatically.
-   * + [name] tracker name; if not given, default to empty string.
+   *
+   * + [name] - tracker name; if not given, default to empty string.
    */
   PageTracker getTrackerByName([String name]) {
     _initJSFunctions();
