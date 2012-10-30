@@ -9,3 +9,5 @@ homepage: http://rikulo.org
 dependencies:
   js : '0.0.7'
   rikulo_commons:
+    git: git://github.com/rikulo/rikulo-commons.git
+
