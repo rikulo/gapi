@@ -1,4 +1,4 @@
-import 'package:rikulo_gapi/rikulo_gapi.dart';
+import 'package:rikulo_gapi/gfeed.dart';
 
 void main() {
   // Create a feed instance that will grab Digg's feed.

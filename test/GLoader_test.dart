@@ -1,4 +1,4 @@
-import 'package:rikulo_gapi/rikulo_gapi.dart';
+import 'package:rikulo_gapi/gloader.dart';
 
 void main() {
   gLoader.loadIPLatLng()
